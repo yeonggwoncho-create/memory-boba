@@ -28,12 +28,12 @@
       display: flex;
       justify-content: center;
     }
-    .wrapper { max-width: 680px; width: 100%; }
+    .wrapper { max-width: 700px; width: 100%; }
     .card {
       background: var(--foam);
       border: 2px solid var(--latte);
       border-radius: 24px;
-      padding: 32px;
+      padding: 36px 32px;
       box-shadow: 0 8px 24px rgba(122, 74, 42, 0.06);
       margin-bottom: 24px;
     }
@@ -48,7 +48,7 @@
       margin-bottom: 16px;
     }
     h1 { font-size: 32px; font-weight: 900; color: var(--brown); margin-bottom: 8px; }
-    h2 { font-size: 20px; font-weight: 800; color: var(--brown); margin: 24px 0 10px; }
+    h2 { font-size: 20px; font-weight: 800; color: var(--brown); margin: 26px 0 10px; }
     p { margin-bottom: 12px; color: var(--pearl); font-size: 15px; }
     .contact-box {
       background: var(--cream);
@@ -64,9 +64,12 @@
       font-size: 18px;
       text-decoration: none;
     }
+    .contact-box a:hover {
+      text-decoration: underline;
+    }
     ul { padding-left: 24px; margin-bottom: 16px; }
-    li { margin-bottom: 8px; font-size: 15px; }
-    .nav-links { display: flex; gap: 16px; margin-top: 24px; font-weight: 700; }
+    li { margin-bottom: 10px; font-size: 15px; }
+    .nav-links { display: flex; gap: 16px; margin-top: 28px; padding-top: 16px; border-top: 1px solid var(--latte); font-weight: 700; font-size: 14px; }
     .nav-links a { color: var(--caramel); text-decoration: none; }
     .nav-links a:hover { text-decoration: underline; }
   </style>
@@ -87,22 +90,25 @@
       <ul>
         <li><strong>How do I play Memory Boba?</strong><br>Watch the grid as a pattern of tapioca pearls flashes briefly. Memorize the pattern and tap all the highlighted pearls back from memory. As you clear levels, the grid expands from 3x3 to 5x5!</li>
         <li><strong>What are the game modes?</strong><br>
-          • <strong>Classic:</strong> Level up through scaling grids with 3 strikes.<br>
-          • <strong>Casual:</strong> Relaxed, untimed practice with unlimited lives.<br>
-          • <strong>Speed Classic:</strong> Fast 0.5s flashes and 5-second countdown timer.<br>
+          • <strong>Classic Memory:</strong> Level up through scaling grids with 3 strikes.<br>
+          • <strong>Casual Memory:</strong> Relaxed, untimed practice with unlimited lives and undo.<br>
+          • <strong>Boba Memory:</strong> Memorize boba pearl placements with randomized variations.<br>
+          • <strong>Speed Classic:</strong> Fast-paced flashes and quick timer challenges.<br>
           • <strong>Speed Custom:</strong> Customize grid dimensions, pearl count, and flash duration to test your brain limits!
         </li>
-        <li><strong>Are there any in-app purchases or ads?</strong><br>Memory Boba is designed to be a clean, distraction-free brain training game.</li>
-        <li><strong>Can I play offline?</strong><br>Yes! Memory Boba works completely offline once loaded.</li>
+        <li><strong>Are there any in-app purchases or subscriptions?</strong><br>Memory Boba is free and designed to be a clean, fun brain training game for players of all ages.</li>
+        <li><strong>Can I play offline?</strong><br>Yes! Memory Boba works completely offline without requiring an active internet connection.</li>
       </ul>
 
       <h2>Contact & Feedback</h2>
       <p>For any inquiries, feedback, or support requests, please contact the developer directly at <a href="mailto:anthonycho3014@gmail.com">anthonycho3014@gmail.com</a>. We reply to all inquiries promptly.</p>
 
       <div class="nav-links">
-        <a href="./marketing.html">About & Features</a>
+        <a href="./marketing.html">Marketing & About</a>
+        <span>•</span>
         <a href="./privacy.html">Privacy Policy</a>
-        <a href="./index.html">← Play Memory Boba</a>
+        <span>•</span>
+        <a href="./index.html">← Play Online</a>
       </div>
     </div>
   </div>

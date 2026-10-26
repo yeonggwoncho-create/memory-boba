@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Memory Boba - Brain Pattern Memory Game</title>
+  <title>Memory Boba - Visual Memory & Brain Training Game</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
@@ -30,30 +30,30 @@
       text-align: center;
     }
     .hero {
-      max-width: 600px;
-      margin-bottom: 36px;
+      max-width: 660px;
+      margin-bottom: 40px;
     }
     .logo-badge {
-      width: 76px;
-      height: 76px;
+      width: 80px;
+      height: 80px;
       background: var(--brown);
       border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 16px;
-      box-shadow: 0 8px 20px rgba(122, 74, 42, 0.2);
+      margin-bottom: 18px;
+      box-shadow: 0 8px 24px rgba(122, 74, 42, 0.2);
     }
-    .logo-badge svg { width: 38px; height: 38px; fill: var(--foam); }
-    h1 { font-size: 38px; font-weight: 900; color: var(--brown); letter-spacing: -1px; margin-bottom: 12px; }
+    .logo-badge svg { width: 42px; height: 42px; fill: var(--foam); }
+    h1 { font-size: 40px; font-weight: 900; color: var(--brown); letter-spacing: -1px; margin-bottom: 12px; }
     p.lead { font-size: 18px; font-weight: 700; color: var(--caramel); margin-bottom: 24px; line-height: 1.5; }
     .features {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
-      max-width: 720px;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 18px;
+      max-width: 840px;
       width: 100%;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
     .feature-card {
       background: var(--foam);
@@ -63,14 +63,14 @@
       text-align: left;
       box-shadow: 0 4px 16px rgba(122, 74, 42, 0.05);
     }
-    .feature-card h3 { font-size: 18px; font-weight: 800; color: var(--brown); margin-bottom: 6px; }
+    .feature-card h3 { font-size: 18px; font-weight: 800; color: var(--brown); margin-bottom: 8px; }
     .feature-card p { font-size: 14px; color: var(--pearl); opacity: 0.85; line-height: 1.5; }
     .cta-row {
       display: flex;
-      gap: 12px;
+      gap: 14px;
       justify-content: center;
       flex-wrap: wrap;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
     .btn {
       background: var(--brown);
@@ -81,7 +81,9 @@
       font-weight: 800;
       text-decoration: none;
       box-shadow: 0 4px 14px rgba(122, 74, 42, 0.25);
+      transition: transform 0.15s;
     }
+    .btn:hover { transform: translateY(-2px); }
     .btn-secondary {
       background: var(--foam);
       color: var(--brown);
@@ -94,8 +96,11 @@
       font-weight: 700;
       display: flex;
       gap: 16px;
+      margin-top: auto;
+      padding-top: 24px;
     }
     footer a { color: var(--brown); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -106,34 +111,40 @@
       </svg>
     </div>
     <h1>Memory Boba</h1>
-    <p class="lead">Train your working memory with cute bubble tea pearls! Memorize flashing patterns on a grid and tap them back.</p>
+    <p class="lead">Train your working memory and pattern recall with delightful bubble tea pearls! Memorize flashing patterns on the grid and tap them back.</p>
     <div class="cta-row">
-      <a class="btn" href="./index.html">Play Online</a>
-      <a class="btn btn-secondary" href="./support.html">Contact Support</a>
+      <a class="btn" href="./index.html">Play Online Web Game</a>
+      <a class="btn btn-secondary" href="./support.html">Customer Support</a>
     </div>
   </div>
 
   <div class="features">
     <div class="feature-card">
-      <h3>🧠 4 Game Modes</h3>
-      <p>Enjoy Classic progression (3x3 to 5x5), Casual untimed mode, fast Speed Classic, or custom configurable speed training.</p>
+      <h3>🧋 5 Fun Game Modes</h3>
+      <p>Enjoy Classic progression (3x3 up to 5x5), Casual untimed practice, Boba Memory with randomized pearl placement, Speed Classic, and Speed Custom.</p>
     </div>
     <div class="feature-card">
-      <h3>🧋 Sweet Boba Theme</h3>
-      <p>Relaxing milk tea and caramel aesthetics with delightful bubble-pop sound effects synthesized in real time.</p>
+      <h3>🧠 Cognitive Brain Training</h3>
+      <p>Designed to exercise working memory, visual-spatial awareness, and focus in short, addictive daily training sessions.</p>
     </div>
     <div class="feature-card">
-      <h3>⚡ Instant & Light</h3>
-      <p>Zero loading delays, no tracking, completely private, and works offline whenever you want a quick mental workout.</p>
+      <h3>🔒 Privacy-First Design</h3>
+      <p>No user accounts, no passwords, and zero personal data tracking. Your scores and preferences stay private on your device.</p>
+    </div>
+    <div class="feature-card">
+      <h3>⚡ Play Anywhere</h3>
+      <p>Available on the iOS App Store and online in your web browser. Fast loading with offline gameplay support.</p>
     </div>
   </div>
 
   <footer>
+    <a href="./index.html">Play Game</a>
+    <span>•</span>
+    <a href="./marketing.html">Marketing</a>
+    <span>•</span>
     <a href="./support.html">Support</a>
     <span>•</span>
     <a href="./privacy.html">Privacy Policy</a>
-    <span>•</span>
-    <a href="./index.html">Play Game</a>
   </footer>
 </body>
 </html>
