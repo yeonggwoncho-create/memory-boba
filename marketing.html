@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boba Walk - Walk, Earn Pearls, Get Rewarded</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FBF3E9;
+      --foam: #FFFAF4;
+      --skin: #F6D3B0;
+      --milk-tea: #E8C39E;
+      --latte: #F1DEC8;
+      --caramel: #C68B59;
+      --brown: #7A4A2A;
+      --pearl: #3B2416;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+    body {
+      background: var(--cream);
+      color: var(--pearl);
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      text-align: center;
+    }
+    .hero {
+      max-width: 600px;
+      margin-bottom: 36px;
+    }
+    .logo-badge {
+      width: 72px;
+      height: 72px;
+      background: var(--brown);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      box-shadow: 0 8px 20px rgba(122, 74, 42, 0.2);
+    }
+    .logo-badge svg { width: 36px; height: 36px; fill: var(--foam); }
+    h1 { font-size: 38px; font-weight: 900; color: var(--brown); letter-spacing: -1px; margin-bottom: 12px; }
+    p.lead { font-size: 18px; font-weight: 700; color: var(--caramel); margin-bottom: 24px; line-height: 1.5; }
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      max-width: 720px;
+      width: 100%;
+      margin-bottom: 32px;
+    }
+    .feature-card {
+      background: var(--foam);
+      border: 2px solid var(--latte);
+      border-radius: 20px;
+      padding: 24px;
+      text-align: left;
+      box-shadow: 0 4px 16px rgba(122, 74, 42, 0.05);
+    }
+    .feature-card h3 { font-size: 18px; font-weight: 800; color: var(--brown); margin-bottom: 6px; }
+    .feature-card p { font-size: 14px; color: var(--pearl); opacity: 0.85; line-height: 1.5; }
+    .cta-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .btn {
+      background: var(--brown);
+      color: var(--foam);
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 800;
+      text-decoration: none;
+      box-shadow: 0 4px 14px rgba(122, 74, 42, 0.25);
+    }
+    .btn-secondary {
+      background: var(--foam);
+      color: var(--brown);
+      border: 2px solid var(--milk-tea);
+      box-shadow: none;
+    }
+    footer {
+      font-size: 13px;
+      color: var(--caramel);
+      font-weight: 700;
+      display: flex;
+      gap: 16px;
+    }
+    footer a { color: var(--brown); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="hero">
+    <div class="logo-badge">
+      <svg viewBox="0 0 24 24">
+        <path d="M5 4h14l-2 15a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3L5 4zm3-2a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1zm4 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-3 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+      </svg>
+    </div>
+    <h1>Boba Walk</h1>
+    <p class="lead">Turn your daily steps into sweet boba rewards. Walk, collect tapioca pearls, and cash out real rewards!</p>
+    <div class="cta-row">
+      <a class="btn" href="./support.html">Get Support</a>
+      <a class="btn btn-secondary" href="./index.html">Play Mini-Game</a>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <h3>🧋 Step Rewards</h3>
+      <p>Every 500 steps automatically unlocks a fresh tapioca pearl. Pop pearls to earn coins all day long.</p>
+    </div>
+    <div class="feature-card">
+      <h3>🔒 Private & Secure</h3>
+      <p>Seamlessly integrates with Apple Health. Your fitness data is processed strictly on your phone and never sold.</p>
+    </div>
+    <div class="feature-card">
+      <h3>💸 Real Cash Payouts</h3>
+      <p>Redeem your coins for real cash sent directly to your PayPal account. Transparent, simple, and honest.</p>
+    </div>
+  </div>
+
+  <footer>
+    <a href="./privacy.html">Privacy Policy</a>
+    <span>•</span>
+    <a href="./support.html">Support</a>
+    <span>•</span>
+    <a href="./index.html">Memory Boba Game</a>
+  </footer>
+</body>
+</html>

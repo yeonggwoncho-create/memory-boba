@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Boba Walk - Support & Contact</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FBF3E9;
+      --foam: #FFFAF4;
+      --skin: #F6D3B0;
+      --milk-tea: #E8C39E;
+      --latte: #F1DEC8;
+      --caramel: #C68B59;
+      --brown: #7A4A2A;
+      --pearl: #3B2416;
+      --muted: #9C7B63;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Nunito', sans-serif; }
+    body {
+      background-color: var(--cream);
+      color: var(--pearl);
+      padding: 32px 20px;
+      line-height: 1.6;
+      display: flex;
+      justify-content: center;
+    }
+    .wrapper { max-width: 680px; width: 100%; }
+    .card {
+      background: var(--foam);
+      border: 2px solid var(--latte);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 8px 24px rgba(122, 74, 42, 0.06);
+      margin-bottom: 24px;
+    }
+    .badge {
+      display: inline-block;
+      background: var(--skin);
+      color: var(--brown);
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 16px;
+    }
+    h1 { font-size: 32px; font-weight: 900; color: var(--brown); margin-bottom: 8px; }
+    h2 { font-size: 20px; font-weight: 800; color: var(--brown); margin: 24px 0 10px; }
+    p { margin-bottom: 12px; color: var(--pearl); font-size: 15px; }
+    .contact-box {
+      background: var(--cream);
+      border: 2px dashed var(--caramel);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .contact-box a {
+      color: var(--brown);
+      font-weight: 800;
+      font-size: 18px;
+      text-decoration: none;
+    }
+    ul { padding-left: 24px; margin-bottom: 16px; }
+    li { margin-bottom: 8px; font-size: 15px; }
+    .nav-links { display: flex; gap: 16px; margin-top: 24px; font-weight: 700; }
+    .nav-links a { color: var(--caramel); text-decoration: none; }
+    .nav-links a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="card">
+      <span class="badge">Customer Support</span>
+      <h1>Boba Walk Support</h1>
+      <p>Have questions about your step rewards, daily check-ins, or cash-out requests? We're here to help!</p>
+
+      <div class="contact-box">
+        <p style="margin-bottom: 6px; font-weight: 700; color: var(--muted);">Direct Email Support</p>
+        <a href="mailto:support@bobawalk.app">support@bobawalk.app</a>
+      </div>
+
+      <h2>Frequently Asked Questions</h2>
+      <ul>
+        <li><strong>How do step rewards work?</strong><br>Every 500 steps recorded in Apple Health unlocks 1 tapioca pearl (up to 10,000 steps/day). Tap pearls on the Home tab to claim coins!</li>
+        <li><strong>When can I cash out?</strong><br>You can redeem your earned coins for USD via PayPal once your account has been active for 7 days. Requests are manually reviewed and processed within 5 business days.</li>
+        <li><strong>Is my health data private?</strong><br>Yes, 100%. Boba Walk only reads activity data locally on your device to calculate rewards. We never sell, track, or share your health data with advertisers.</li>
+      </ul>
+
+      <h2>Need More Help?</h2>
+      <p>If you suspect an issue with step synchronization or a pending PayPal payout, please email us with your registered PayPal address and device details.</p>
+
+      <div class="nav-links">
+        <a href="./privacy.html">Privacy Policy</a>
+        <a href="./terms.html">Terms of Service</a>
+        <a href="./index.html">← Memory Boba Game</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
