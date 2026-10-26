@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Memory Boba - Pattern Memory Game</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #FBF3E9;
+      --foam: #FFFAF4;
+      --skin: #F6D3B0;
+      --milk-tea: #E8C39E;
+      --latte: #F1DEC8;
+      --caramel: #C68B59;
+      --brown: #7A4A2A;
+      --pearl: #3B2416;
+      --pearl-active: #FFD8A8;
+      --success: #6E8B4E;
+      --danger: #B4533C;
+      --gold: #F4C430;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      font-family: 'Nunito', sans-serif;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--pearl);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 16px;
+      touch-action: manipulation;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    header {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 12px;
+      position: relative;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .boba-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--brown);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(122, 74, 42, 0.25);
+    }
+
+    .boba-icon svg {
+      width: 22px;
+      height: 22px;
+      fill: var(--foam);
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 900;
+      color: var(--brown);
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--caramel);
+      font-weight: 700;
+    }
+
+    /* Screen management */
+    .screen {
+      width: 100%;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      animation: fadeIn 0.25s ease;
+    }
+
+    .screen.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Menu Card */
+    .card {
+      width: 100%;
+      background: var(--foam);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 8px 24px rgba(122, 74, 42, 0.08);
+      border: 2px solid var(--latte);
+      margin-bottom: 16px;
+    }
+
+    .mode-select {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .mode-btn {
+      background: var(--cream);
+      border: 2px solid var(--milk-tea);
+      border-radius: 18px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-align: left;
+    }
+
+    .mode-btn:hover, .mode-btn:active {
+      border-color: var(--caramel);
+      background: var(--skin);
+      transform: scale(0.98);
+    }
+
+    .mode-info h3 {
+      font-size: 17px;
+      color: var(--brown);
+      font-weight: 800;
+    }
+
+    .mode-info p {
+      font-size: 12px;
+      color: var(--pearl);
+      opacity: 0.75;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    .mode-badge {
+      background: var(--caramel);
+      color: white;
+      font-size: 11px;
+      font-weight: 800;
+      padding: 4px 8px;
+      border-radius: 999px;
+    }
+
+    /* Custom settings panel */
+    .custom-panel {
+      margin-top: 10px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--milk-tea);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+    }
+
+    .custom-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--brown);
+    }
+
+    .custom-row select, .custom-row input {
+      padding: 6px 10px;
+      border-radius: 10px;
+      border: 1px solid var(--caramel);
+      background: var(--foam);
+      color: var(--pearl);
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    /* In-Game Header / Stats */
+    .game-stats {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--foam);
+      padding: 12px 18px;
+      border-radius: 18px;
+      border: 2px solid var(--latte);
+      margin-bottom: 14px;
+      box-shadow: 0 4px 12px rgba(122, 74, 42, 0.05);
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--caramel);
+      letter-spacing: 0.5px;
+    }
+
+    .stat-val {
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--brown);
+    }
+
+    .status-msg {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--brown);
+      margin-bottom: 12px;
+      min-height: 22px;
+      text-align: center;
+      transition: all 0.2s;
+    }
+
+    /* Game Board Grid */
+    .grid-wrapper {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      max-width: 380px;
+      background: var(--latte);
+      padding: 14px;
+      border-radius: 28px;
+      box-shadow: inset 0 3px 8px rgba(122, 74, 42, 0.15), 0 8px 20px rgba(122, 74, 42, 0.08);
+      border: 4px solid var(--foam);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .grid {
+      width: 100%;
+      height: 100%;
+      display: grid;
+      gap: 10px;
+    }
+
+    .cell {
+      background: var(--foam);
+      border-radius: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 8px rgba(122, 74, 42, 0.08);
+      position: relative;
+      transition: transform 0.1s, background-color 0.15s, box-shadow 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .cell::after {
+      content: '';
+      width: 45%;
+      height: 45%;
+      border-radius: 50%;
+      background: var(--milk-tea);
+      opacity: 0.35;
+      transition: all 0.15s;
+    }
+
+    /* Flashing highlight (Boba pearl pattern) */
+    .cell.flash {
+      background: var(--caramel) !important;
+      transform: scale(0.96);
+      box-shadow: 0 0 16px rgba(198, 139, 89, 0.8);
+    }
+
+    .cell.flash::after {
+      background: var(--foam);
+      opacity: 1;
+      transform: scale(1.3);
+    }
+
+    /* User tapped correctly */
+    .cell.correct {
+      background: var(--brown) !important;
+      transform: scale(0.96);
+    }
+
+    .cell.correct::after {
+      background: var(--pearl-active);
+      opacity: 1;
+      transform: scale(1.2);
+    }
+
+    /* User tapped incorrectly */
+    .cell.wrong {
+      background: var(--danger) !important;
+      animation: shake 0.3s;
+    }
+
+    .cell.wrong::after {
+      background: white;
+      opacity: 0.9;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-6px); }
+      40%, 80% { transform: translateX(6px); }
+    }
+
+    /* Buttons */
+    .btn {
+      background: var(--brown);
+      color: var(--foam);
+      font-size: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 18px;
+      padding: 14px 24px;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(122, 74, 42, 0.25);
+      transition: all 0.15s;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 14px;
+    }
+
+    .btn:hover, .btn:active {
+      transform: scale(0.98);
+      background: var(--pearl);
+    }
+
+    .btn-secondary {
+      background: var(--cream);
+      color: var(--brown);
+      border: 2px solid var(--milk-tea);
+      box-shadow: none;
+    }
+
+    .btn-secondary:hover {
+      background: var(--latte);
+    }
+
+    /* Result / Modal Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(59, 36, 22, 0.55);
+      backdrop-filter: blur(4px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 100;
+    }
+
+    .overlay.active {
+      display: flex;
+      animation: fadeIn 0.2s;
+    }
+
+    .modal {
+      background: var(--foam);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 360px;
+      padding: 28px 24px;
+      text-align: center;
+      border: 3px solid var(--latte);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.2);
+    }
+
+    .modal h2 {
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--brown);
+      margin-bottom: 8px;
+    }
+
+    .modal p {
+      font-size: 14px;
+      color: var(--pearl);
+      margin-bottom: 18px;
+      font-weight: 600;
+    }
+
+    .modal-score {
+      font-size: 42px;
+      font-weight: 900;
+      color: var(--caramel);
+      margin-bottom: 4px;
+    }
+
+    .modal-best {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title-row">
+        <div class="boba-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M5 4h14l-2 15a3 3 0 0 1-3 3H10a3 3 0 0 1-3-3L5 4zm3-2a1 1 0 0 1 1-1h6a1 1 0 1 1 0 2H9a1 1 0 0 1-1-1zm4 10a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm-3 3a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm6 0a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"/>
+          </svg>
+        </div>
+        <h1>Memory Boba</h1>
+      </div>
+      <div class="subtitle">Memorize the boba pearls & tap them back!</div>
+    </header>
+
+    <!-- 1. MENU SCREEN -->
+    <div id="screen-menu" class="screen active">
+      <div class="card">
+        <div class="mode-select">
+          <div class="mode-btn" onclick="startGame('classic')">
+            <div class="mode-info">
+              <h3>Classic</h3>
+              <p>Levels scale from 3x3 to 5x5. 3 strikes and out!</p>
+            </div>
+            <span class="mode-badge">Levels</span>
+          </div>
+
+          <div class="mode-btn" onclick="startGame('casual')">
+            <div class="mode-info">
+              <h3>Casual</h3>
+              <p>No timers, no strikes. Just relax & practice.</p>
+            </div>
+            <span class="mode-badge">Chill</span>
+          </div>
+
+          <div class="mode-btn" onclick="startGame('speed-classic')">
+            <div class="mode-info">
+              <h3>Speed Classic</h3>
+              <p>Fast flashes & 5s per level. Quick reflexes!</p>
+            </div>
+            <span class="mode-badge">Fast</span>
+          </div>
+
+          <div class="mode-btn" onclick="toggleCustomPanel()">
+            <div class="mode-info">
+              <h3>Speed Custom</h3>
+              <p>Customize grid size, pearl count & flash speed.</p>
+            </div>
+            <span class="mode-badge">Custom</span>
+          </div>
+
+          <div id="custom-panel" class="custom-panel" style="display: none;">
+            <div class="custom-row">
+              <label>Grid Size:</label>
+              <select id="cfg-grid">
+                <option value="3">3 x 3</option>
+                <option value="4" selected>4 x 4</option>
+                <option value="5">5 x 5</option>
+              </select>
+            </div>
+            <div class="custom-row">
+              <label>Pearls Count:</label>
+              <select id="cfg-count">
+                <option value="3">3 Pearls</option>
+                <option value="4">4 Pearls</option>
+                <option value="5" selected>5 Pearls</option>
+                <option value="6">6 Pearls</option>
+                <option value="7">7 Pearls</option>
+                <option value="8">8 Pearls</option>
+              </select>
+            </div>
+            <div class="custom-row">
+              <label>Flash Time:</label>
+              <select id="cfg-speed">
+                <option value="500">Fast (0.5s)</option>
+                <option value="800" selected>Normal (0.8s)</option>
+                <option value="1200">Slow (1.2s)</option>
+              </select>
+            </div>
+            <button class="btn" onclick="startGame('speed-custom')">Play Custom Mode</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. GAMEPLAY SCREEN -->
+    <div id="screen-game" class="screen">
+      <div class="game-stats">
+        <div class="stat-item">
+          <span class="stat-label">Level</span>
+          <span id="stat-level" class="stat-val">1</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Score</span>
+          <span id="stat-score" class="stat-val">0</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label" id="timer-or-lives-label">Lives</span>
+          <span id="stat-lives" class="stat-val">3</span>
+        </div>
+      </div>
+
+      <div id="status-msg" class="status-msg">Watch the pearls...</div>
+
+      <div class="grid-wrapper">
+        <div id="grid" class="grid"></div>
+      </div>
+
+      <button class="btn btn-secondary" onclick="quitGame()">Quit to Menu</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER / CLEAR MODAL -->
+  <div id="modal-overlay" class="overlay">
+    <div class="modal">
+      <h2 id="modal-title">Game Over</h2>
+      <p id="modal-desc">Nice try! Keep training your memory.</p>
+      <div id="modal-score" class="modal-score">140</div>
+      <div id="modal-best" class="modal-best">Best Score: 250</div>
+      <button class="btn" onclick="retryGame()">Play Again</button>
+      <button class="btn btn-secondary" onclick="closeModal()">Back to Menu</button>
+    </div>
+  </div>
+
+  <script>
+    // Audio synthesis using Web Audio API (smooth boba bubble pops)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    function playPop(freq = 440, duration = 0.08) {
+      if (!audioCtx) return;
+      try {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(freq * 1.5, audioCtx.currentTime + duration);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + duration);
+      } catch(e) {}
+    }
+
+    function playSuccess() {
+      playPop(523, 0.1);
+      setTimeout(() => playPop(659, 0.1), 100);
+      setTimeout(() => playPop(784, 0.15), 200);
+    }
+
+    function playWrong() {
+      playPop(200, 0.2);
+    }
+
+    // State
+    let currentMode = 'classic';
+    let level = 1;
+    let score = 0;
+    let lives = 3;
+    let timeLeft = 0;
+    let timerId = null;
+    let gridDimension = 3;
+    let targetIndices = new Set();
+    let userIndices = new Set();
+    let isAcceptingInput = false;
+
+    function toggleCustomPanel() {
+      const p = document.getElementById('custom-panel');
+      p.style.display = p.style.display === 'none' ? 'flex' : 'none';
+    }
+
+    function startGame(mode) {
+      currentMode = mode;
+      level = 1;
+      score = 0;
+      lives = (mode === 'casual') ? 999 : 3;
+
+      document.getElementById('screen-menu').classList.remove('active');
+      document.getElementById('screen-game').classList.add('active');
+
+      const label = document.getElementById('timer-or-lives-label');
+      if (mode === 'speed-classic') {
+        label.innerText = 'Timer';
+      } else if (mode === 'casual') {
+        label.innerText = 'Mode';
+      } else {
+        label.innerText = 'Lives';
+      }
+
+      setupLevel();
+    }
+
+    function setupLevel() {
+      clearInterval(timerId);
+      userIndices.clear();
+      isAcceptingInput = false;
+
+      let pearlCount = 3;
+      let flashDuration = 1000;
+
+      if (currentMode === 'classic') {
+        gridDimension = level <= 3 ? 3 : (level <= 7 ? 4 : 5);
+        pearlCount = Math.min(2 + level, Math.floor((gridDimension * gridDimension) * 0.55));
+        flashDuration = Math.max(700, 1200 - level * 40);
+      } else if (currentMode === 'casual') {
+        gridDimension = level <= 3 ? 3 : 4;
+        pearlCount = 2 + level;
+        flashDuration = 1200;
+      } else if (currentMode === 'speed-classic') {
+        gridDimension = level <= 4 ? 3 : 4;
+        pearlCount = 2 + level;
+        flashDuration = 550;
+        timeLeft = 5;
+      } else if (currentMode === 'speed-custom') {
+        gridDimension = parseInt(document.getElementById('cfg-grid').value);
+        pearlCount = parseInt(document.getElementById('cfg-count').value);
+        flashDuration = parseInt(document.getElementById('cfg-speed').value);
+      }
+
+      updateStats();
+
+      // Render grid
+      const grid = document.getElementById('grid');
+      grid.innerHTML = '';
+      grid.style.gridTemplateColumns = `repeat(${gridDimension}, 1fr)`;
+      grid.style.gridTemplateRows = `repeat(${gridDimension}, 1fr)`;
+
+      const totalCells = gridDimension * gridDimension;
+      for (let i = 0; i < totalCells; i++) {
+        const cell = document.createElement('div');
+        cell.className = 'cell';
+        cell.dataset.index = i;
+        cell.onclick = () => onCellTapped(i, cell);
+        grid.appendChild(cell);
+      }
+
+      // Generate random unique targets
+      targetIndices = new Set();
+      while (targetIndices.size < pearlCount) {
+        const rnd = Math.floor(Math.random() * totalCells);
+        targetIndices.add(rnd);
+      }
+
+      // Countdown to flash
+      const status = document.getElementById('status-msg');
+      status.innerText = `Memorize ${pearlCount} pearls!`;
+      status.style.color = 'var(--brown)';
+
+      setTimeout(() => {
+        // Flash pearls
+        const cells = document.querySelectorAll('.cell');
+        targetIndices.forEach(idx => {
+          cells[idx].classList.add('flash');
+        });
+        playPop(600, 0.15);
+
+        // Turn off flash after duration
+        setTimeout(() => {
+          targetIndices.forEach(idx => {
+            cells[idx].classList.remove('flash');
+          });
+          status.innerText = 'Tap all the pearls!';
+          isAcceptingInput = true;
+
+          if (currentMode === 'speed-classic') {
+            startSpeedTimer();
+          }
+        }, flashDuration);
+      }, 500);
+    }
+
+    function startSpeedTimer() {
+      clearInterval(timerId);
+      const statVal = document.getElementById('stat-lives');
+      statVal.innerText = `${timeLeft}s`;
+
+      timerId = setInterval(() => {
+        timeLeft--;
+        statVal.innerText = `${timeLeft}s`;
+        if (timeLeft <= 0) {
+          clearInterval(timerId);
+          handleWrongTurn("Time's up!");
+        }
+      }, 1000);
+    }
+
+    function onCellTapped(idx, cell) {
+      if (!isAcceptingInput) return;
+      if (userIndices.has(idx)) return; // already tapped
+
+      if (targetIndices.has(idx)) {
+        // Correct
+        userIndices.add(idx);
+        cell.classList.add('correct');
+        playPop(440 + userIndices.size * 50, 0.08);
+
+        // Check if finished level
+        if (userIndices.size === targetIndices.size) {
+          isAcceptingInput = false;
+          clearInterval(timerId);
+          score += 10 * level;
+          updateStats();
+          playSuccess();
+          document.getElementById('status-msg').innerText = 'Great memory!';
+          document.getElementById('status-msg').style.color = 'var(--success)';
+
+          setTimeout(() => {
+            level++;
+            setupLevel();
+          }, 900);
+        }
+      } else {
+        // Wrong
+        cell.classList.add('wrong');
+        playWrong();
+        handleWrongTurn("Oops! Wrong pearl.");
+      }
+    }
+
+    function handleWrongTurn(msg) {
+      isAcceptingInput = false;
+      clearInterval(timerId);
+      const status = document.getElementById('status-msg');
+      status.innerText = msg;
+      status.style.color = 'var(--danger)';
+
+      // Reveal correct ones
+      const cells = document.querySelectorAll('.cell');
+      targetIndices.forEach(idx => {
+        if (!userIndices.has(idx)) {
+          cells[idx].classList.add('flash');
+        }
+      });
+
+      if (currentMode !== 'casual') {
+        lives--;
+        updateStats();
+      }
+
+      setTimeout(() => {
+        if (lives <= 0 && currentMode !== 'casual') {
+          showGameOver();
+        } else {
+          setupLevel(); // retry same or next
+        }
+      }, 1200);
+    }
+
+    function updateStats() {
+      document.getElementById('stat-level').innerText = level;
+      document.getElementById('stat-score').innerText = score;
+      const livesLabel = document.getElementById('stat-lives');
+      if (currentMode === 'speed-classic') {
+        livesLabel.innerText = `${timeLeft}s`;
+      } else if (currentMode === 'casual') {
+        livesLabel.innerText = '∞';
+      } else {
+        livesLabel.innerText = lives;
+      }
+    }
+
+    function showGameOver() {
+      const best = Math.max(score, parseInt(localStorage.getItem('memory_boba_best') || '0'));
+      localStorage.setItem('memory_boba_best', best);
+
+      document.getElementById('modal-title').innerText = 'Game Over';
+      document.getElementById('modal-desc').innerText = `You made it to Level ${level}!`;
+      document.getElementById('modal-score').innerText = score;
+      document.getElementById('modal-best').innerText = `Personal Best: ${best}`;
+      document.getElementById('modal-overlay').classList.add('active');
+    }
+
+    function retryGame() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      startGame(currentMode);
+    }
+
+    function closeModal() {
+      document.getElementById('modal-overlay').classList.remove('active');
+      quitGame();
+    }
+
+    function quitGame() {
+      clearInterval(timerId);
+      document.getElementById('screen-game').classList.remove('active');
+      document.getElementById('screen-menu').classList.add('active');
+    }
+  </script>
+</body>
+</html>
